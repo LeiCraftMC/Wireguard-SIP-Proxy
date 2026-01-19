@@ -19,4 +19,4 @@ VOLUME /etc/wireguard
 # SIP and RTP ports
 EXPOSE 5060/udp 10000-10100/udp
 
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash", "/entrypoint.sh"]
