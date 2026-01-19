@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Start WireGuard
 wg-quick up wg0
 
@@ -9,3 +9,4 @@ wg-quick up wg0
 
 # Start Asterisk in the foreground
 asterisk -f
+
