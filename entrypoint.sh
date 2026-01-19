@@ -1,17 +1,28 @@
 #!/bin/sh
 
-# Start WireGuard
+# Function to handle shutdown
+cleanup() {
+    echo "Shutting down WireGuard..."
+    wg-quick down wg0
+    exit 0
+}
+
+# Trap termination signals
+trap cleanup SIGINT SIGTERM
+
 echo "Starting WireGuard..."
-wg-quick up wg0
+# Ensure the config file exists before trying to start
+if [ -f "/etc/wireguard/wg0.conf" ]; then
+    wg-quick up wg0
+else
+    echo "Error: /etc/wireguard/wg0.conf not found!"
+    exit 1
+fi
 
+# Optional: verify the route
+echo "Current routing table:"
+ip route
 
-# Route all Telekom IP ranges through WireGuard
-# 217.0.0.0/13 is the main one, adding 80.128.0.0/10 for safety
-#ip route add 217.0.0.0/13 dev wg0
-#ip route add 80.128.0.0/10 dev wg0
-
-# Start Asterisk in the foreground
 echo "Starting Asterisk..."
-asterisk -f
-
-
+# -f: foreground, -v: verbose, -p: high priority
+exec asterisk -f -vvv
