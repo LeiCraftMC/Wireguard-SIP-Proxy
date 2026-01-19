@@ -33,4 +33,4 @@ jobs:
           image-name: leicraftmc/wireguard-sip-proxy
           image-tag: latest
           username: ${{ github.actor }}
-          gh-token: ${{ secrets.PAT  }}
+          gh-token: ${{ secrets.GITHUB_TOKEN  }}
