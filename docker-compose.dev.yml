@@ -1,6 +1,7 @@
 services:
   wireguard-sip-proxy:
-    image: ghcr.io/leicraftmc/wireguard-sip-proxy
+    build: .
+    image: wireguard-sip-proxy:local
     container_name: wireguard-sip-proxy
     restart: unless-stopped
     cap_add:
